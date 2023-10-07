@@ -1,0 +1,48 @@
+{
+  "name": "@sezenta/nest-dynamodb",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "@sezenta/nest-dynamodb/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/@sezenta/nest-dynamodb",
+        "tsConfig": "@sezenta/nest-dynamodb/tsconfig.lib.json",
+        "packageJson": "@sezenta/nest-dynamodb/package.json",
+        "main": "@sezenta/nest-dynamodb/src/index.ts",
+        "assets": ["@sezenta/nest-dynamodb/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @sezenta/nest-dynamodb",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "@sezenta/nest-dynamodb/**/*.ts",
+          "@sezenta/nest-dynamodb/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "@sezenta/nest-dynamodb/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
