@@ -1,0 +1,48 @@
+{
+  "name": "@sezenta/nest-email",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "@sezenta/nest-email/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/@sezenta/nest-email",
+        "tsConfig": "@sezenta/nest-email/tsconfig.lib.json",
+        "packageJson": "@sezenta/nest-email/package.json",
+        "main": "@sezenta/nest-email/src/index.ts",
+        "assets": ["@sezenta/nest-email/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @sezenta/nest-email {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "@sezenta/nest-email/**/*.ts",
+          "@sezenta/nest-email/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "@sezenta/nest-email/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

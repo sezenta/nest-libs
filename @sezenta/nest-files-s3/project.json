@@ -1,0 +1,48 @@
+{
+  "name": "@sezenta/nest-files-s3",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "@sezenta/nest-files-s3/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/@sezenta/nest-files-s3",
+        "tsConfig": "@sezenta/nest-files-s3/tsconfig.lib.json",
+        "packageJson": "@sezenta/nest-files-s3/package.json",
+        "main": "@sezenta/nest-files-s3/src/index.ts",
+        "assets": ["@sezenta/nest-files-s3/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @sezenta/nest-files-s3 {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "@sezenta/nest-files-s3/**/*.ts",
+          "@sezenta/nest-files-s3/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "@sezenta/nest-files-s3/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

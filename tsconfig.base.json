@@ -7,15 +7,21 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@sezenta/nest-dynamodb": ["@sezenta/nest-dynamodb/src/index.ts"]
+      "@sezenta/nest-auth": ["@sezenta/nest-auth/src/index.ts"],
+      "@sezenta/nest-dynamodb": ["@sezenta/nest-dynamodb/src/index.ts"],
+      "@sezenta/nest-email": ["@sezenta/nest-email/src/index.ts"],
+      "@sezenta/nest-files-s3": ["@sezenta/nest-files-s3/src/index.ts"],
+      "@sezenta/nest-task": ["@sezenta/nest-task/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
