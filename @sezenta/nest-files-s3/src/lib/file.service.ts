@@ -65,7 +65,6 @@ export class FileService {
     const res = await s3.putObject({
       Bucket: this.options.s3Bucket,
       Key: s3Key,
-      ACL: 'public-read',
       ContentType: contentType,
       Body: buffer,
     });
